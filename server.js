@@ -8,6 +8,8 @@ const server = http.createServer((req, res) => {
     res.end('Overview page');
   } else if (pathName === '/product') {
     res.end('Product page');
+  } else {
+    res.end('Not found');
   }
 });
 
