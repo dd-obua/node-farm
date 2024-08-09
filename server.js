@@ -57,7 +57,7 @@ const server = http.createServer((req, res) => {
     );
 
     res.writeHead(200, { 'Content-type': 'text/html' });
-    res.end('Overview');
+    res.end(cardsOutput);
 
     // Product page
   } else if (pathName === '/product') {
