@@ -2,21 +2,26 @@ const http = require('http');
 const fs = require('fs');
 
 const encoding = 'utf-8';
-const path = `${__dirname}/dev-data/data.json`;
-const data = fs.readFileSync(path, encoding); 
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, encoding);
 
 // Create server
 const server = http.createServer((req, res) => {
   const pathName = req.url;
 
+  // Overview page
   if (pathName === '/' || pathName === '/overview') {
     res.end('Overview page');
+
+    // Product page
   } else if (pathName === '/product') {
     res.end('Product page');
+
+    // API
   } else if (pathName === '/api') {
     res.writeHead(200, { 'Content-type': 'application/json' });
     res.end(data);
   } else {
+    // Not found
     res.writeHead(404, {
       'Content-type': 'text/html',
       'Custom-header': 'Hello World!',
