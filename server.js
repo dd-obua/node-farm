@@ -26,18 +26,19 @@ const server = http.createServer((req, res) => {
 
   // Overview page
   if (pathName === '/' || pathName === '/overview') {
-    res.end('Overview page');
+    res.writeHead(200, { 'Content-type': 'text/html' });
+    res.end(overviewTemplate);
 
     // Product page
   } else if (pathName === '/product') {
-    res.end('Product page');
+    res.writeHead(200, { 'Content-type': 'text/html' });
+    res.end(productTemplate);
 
     // API
   } else if (pathName === '/api') {
     res.writeHead(200, { 'Content-type': 'application/json' });
     res.end(data);
   } else {
-    
     // Not found
     res.writeHead(404, {
       'Content-type': 'text/html',
