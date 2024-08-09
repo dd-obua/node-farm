@@ -20,6 +20,23 @@ const cardTemplate = fs.readFileSync(
   encoding
 );
 
+function fillTemplates(product, template) {
+  let output = template.replace('{%ID%}', product.id);
+  output = output.replace('{%PRODUCTNAME%}', product.productName);
+  output = output.replace('{%IMAGE%}', product.image);
+  output = output.replace('{%FROM%}', product.from);
+  output = output.replace('{%NUTRIENTS%}', product.nutrients);
+  output = output.replace('{%QUANTITY%}', product.quantity);
+  output = output.replace('{%PRICE%}', product.price);
+  output = output.replace('{%DESCRIPTION%}', product.description);
+
+  if (!product.organic) {
+    output = output.replace('{%NOT_ORGANIC%}', 'not-organic');
+  }
+
+  return output;
+}
+
 // Create server
 const server = http.createServer((req, res) => {
   const pathName = req.url;
@@ -27,7 +44,7 @@ const server = http.createServer((req, res) => {
   // Overview page
   if (pathName === '/' || pathName === '/overview') {
     res.writeHead(200, { 'Content-type': 'text/html' });
-    res.end(overviewTemplate);
+    res.end(cardsHtml);
 
     // Product page
   } else if (pathName === '/product') {
