@@ -43,10 +43,10 @@ function fillTemplates(product, template) {
 
 // Create server
 const server = http.createServer((req, res) => {
-  const pathName = req.url;
+  const { query, pathname } = url.parse(req.url, true);
 
   // Overview page
-  if (pathName === '/' || pathName === '/overview') {
+  if (pathname === '/' || pathname === '/overview') {
     const cardsHtml = dataObj
       .map((card) => fillTemplates(card, cardTemplate))
       .join('');
@@ -60,12 +60,12 @@ const server = http.createServer((req, res) => {
     res.end(cardsOutput);
 
     // Product page
-  } else if (pathName === '/product') {
+  } else if (pathname === '/product') {
     res.writeHead(200, { 'Content-type': 'text/html' });
     res.end(productTemplate);
 
     // API
-  } else if (pathName === '/api') {
+  } else if (pathname === '/api') {
     res.writeHead(200, { 'Content-type': 'application/json' });
     res.end(data);
   } else {
