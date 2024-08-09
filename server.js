@@ -44,8 +44,12 @@ const server = http.createServer((req, res) => {
 
   // Overview page
   if (pathName === '/' || pathName === '/overview') {
+    const cardsHtml = dataObj
+      .map((card) => fillTemplates(card, cardTemplate))
+      .join('');
+
     res.writeHead(200, { 'Content-type': 'text/html' });
-    res.end(cardsHtml);
+    res.end('Overview page');
 
     // Product page
   } else if (pathName === '/product') {
