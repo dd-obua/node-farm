@@ -62,9 +62,10 @@ const server = http.createServer((req, res) => {
     // Product page
   } else if (pathname === '/product') {
     const product = dataObj[+query.id];
+    const productOutput = fillTemplates(product, productTemplate);
 
     res.writeHead(200, { 'Content-type': 'text/html' });
-    res.end(productTemplate);
+    res.end(productOutput);
 
     // API
   } else if (pathname === '/api') {
