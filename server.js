@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const encoding = 'utf-8';
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, encoding);
+const dataObj = JSON.parse(data);
 
 // Read templates
 const templateRoot = `${__dirname}/templates`;
@@ -44,7 +45,7 @@ const server = http.createServer((req, res) => {
   // Overview page
   if (pathName === '/' || pathName === '/overview') {
     res.writeHead(200, { 'Content-type': 'text/html' });
-    res.end(cardsHtml);
+    res.end('Overview');
 
     // Product page
   } else if (pathName === '/product') {
@@ -56,6 +57,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-type': 'application/json' });
     res.end(data);
   } else {
+    
     // Not found
     res.writeHead(404, {
       'Content-type': 'text/html',
