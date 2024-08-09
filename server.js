@@ -51,8 +51,13 @@ const server = http.createServer((req, res) => {
       .map((card) => fillTemplates(card, cardTemplate))
       .join('');
 
+    const cardsOutput = overviewTemplate.replace(
+      '{%PRODUCT_CARDS%}',
+      cardsHtml
+    );
+
     res.writeHead(200, { 'Content-type': 'text/html' });
-    res.end('Overview page');
+    res.end('Overview');
 
     // Product page
   } else if (pathName === '/product') {
