@@ -12,10 +12,12 @@ const overviewTemplate = fs.readFileSync(
   `${templateRoot}/overview-template.html`,
   encoding
 );
+
 const productTemplate = fs.readFileSync(
   `${templateRoot}/product-template.html`,
   encoding
 );
+
 const cardTemplate = fs.readFileSync(
   `${templateRoot}/card-template.html`,
   encoding
@@ -37,22 +39,6 @@ function fillTemplates(product, template) {
 
   return output;
 }
-
-// Read templates
-const templateRoot = `${__dirname}/templates`;
-
-const overviewTemplate = fs.readFileSync(
-  `${templateRoot}/overview-template.html`,
-  encoding
-);
-const productTemplate = fs.readFileSync(
-  `${templateRoot}/product-template.html`,
-  encoding
-);
-const cardTemplate = fs.readFileSync(
-  `${templateRoot}/card-template.html`,
-  encoding
-);
 
 // Create server
 const server = http.createServer((req, res) => {
