@@ -2,8 +2,10 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 
+const dataFilePath = `${__dirname}/dev-data/data.json`;
 const encoding = 'utf-8';
-const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, encoding);
+
+const data = fs.readFileSync(dataFilePath, encoding);
 const dataObj = JSON.parse(data);
 
 // Read templates
