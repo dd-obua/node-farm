@@ -1,8 +1,8 @@
 const fs = require('fs');
 
-const path = './txt/input.txt';
+const filePath = './txt/input.txt';
 const encoding = 'utf-8';
-const textIn = fs.readFileSync(path, encoding);
+const textIn = fs.readFileSync(filePath, encoding);
 
 console.log(textIn);
 
