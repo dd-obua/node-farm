@@ -26,7 +26,7 @@ const cardTemplate = fs.readFileSync(
   encoding
 );
 
-function fillTemplates(product, template) {
+function fillTemplate(product, template) {
   let output = template.replace(/{%ID%}/g, product.id);
   output = output.replace(/{%PRODUCTNAME%}/g, product.productName);
   output = output.replace(/{%IMAGE%}/g, product.image);
@@ -50,7 +50,7 @@ const server = http.createServer((req, res) => {
   // Overview page
   if (pathname === '/' || pathname === '/overview') {
     const cardsHtml = dataObj
-      .map((card) => fillTemplates(card, cardTemplate))
+      .map((card) => fillTemplate(card, cardTemplate))
       .join('');
 
     const cardsOutput = overviewTemplate.replace(
@@ -64,7 +64,7 @@ const server = http.createServer((req, res) => {
     // Product page
   } else if (pathname === '/product') {
     const product = dataObj[+query.id];
-    const productOutput = fillTemplates(product, productTemplate);
+    const productOutput = fillTemplate(product, productTemplate);
 
     res.writeHead(200, { 'Content-type': 'text/html' });
     res.end(productOutput);
