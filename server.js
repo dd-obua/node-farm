@@ -2,6 +2,8 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 
+const fillTemplate = require('./moduels/fillTemplate');
+
 const dataFilePath = `${__dirname}/dev-data/data.json`;
 const encoding = 'utf-8';
 
@@ -25,23 +27,6 @@ const cardTemplate = fs.readFileSync(
   `${templateRoot}/card-template.html`,
   encoding
 );
-
-function fillTemplate(product, template) {
-  let output = template.replace(/{%ID%}/g, product.id);
-  output = output.replace(/{%PRODUCTNAME%}/g, product.productName);
-  output = output.replace(/{%IMAGE%}/g, product.image);
-  output = output.replace(/{%FROM%}/g, product.from);
-  output = output.replace(/{%NUTRIENTS%}/g, product.nutrients);
-  output = output.replace(/{%QUANTITY%}/g, product.quantity);
-  output = output.replace(/{%PRICE%}/g, product.price);
-  output = output.replace(/{%DESCRIPTION%}/g, product.description);
-
-  if (!product.organic) {
-    output = output.replace('{%NOT_ORGANIC%}', 'not-organic');
-  }
-
-  return output;
-}
 
 // Create server
 const server = http.createServer((req, res) => {
@@ -73,8 +58,9 @@ const server = http.createServer((req, res) => {
   } else if (pathname === '/api') {
     res.writeHead(200, { 'Content-type': 'application/json' });
     res.end(data);
-  } else {
+
     // Not found
+  } else {
     res.writeHead(404, {
       'Content-type': 'text/html',
       'Custom-header': 'Hello World!',
