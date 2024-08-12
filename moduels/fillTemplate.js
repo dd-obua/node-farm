@@ -1,5 +1,6 @@
 module.exports = (product, template) => {
   let output = template.replace(/{%ID%}/g, product.id);
+  
   output = output.replace(/{%PRODUCTNAME%}/g, product.productName);
   output = output.replace(/{%IMAGE%}/g, product.image);
   output = output.replace(/{%FROM%}/g, product.from);
